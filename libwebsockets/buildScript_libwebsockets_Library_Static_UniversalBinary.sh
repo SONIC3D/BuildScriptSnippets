@@ -26,7 +26,7 @@
 #THE SOFTWARE.
 ##########################################################################################
 
-if ((0)); then
+if ((1)); then
   git clone git://git.libwebsockets.org/libwebsockets
 fi
 
