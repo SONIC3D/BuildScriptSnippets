@@ -4,7 +4,7 @@
 #
 #Task finished by this script:
 #1.Build lua luac in x86_64.
-#2.Build liblua.a in i386 and x86_64 then combine them in Universal Binary
+#2.Build liblua.a in i386 and x86_64 then combine them in Universal Binary for Mac OSX.
 #3.Install lua luac and combined liblua.a with normal lua install progress.
 #(Usually it will be installed to /usr/local/,root priviledge required)
 #
@@ -56,8 +56,6 @@ tar -xzvf $LUA_PKG_FILENAMEFULL
 # Copy modified Makefile
 cp MakefileModded/Makefile $LUA_PKG_FILENAME/
 cp MakefileModded/src/Makefile $LUA_PKG_FILENAME/src/
-
-cd $LUA_PKG_FILENAME
 
 # Start build works
 rm -rf "$DESTDIR"
