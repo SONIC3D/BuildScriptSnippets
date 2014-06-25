@@ -15,6 +15,7 @@ CXX="xcrun --sdk iphoneos clang++ -arch $ARCH $IOSMV --sysroot=$SDK -isystem $SD
 LDFLAGS="-Wl,-syslibroot,$SDK" \
 ./configure \
 CXXFLAGS="-Os" \
+--disable-threads \
 --host=arm-apple-darwin \
 --disable-shared \
 --prefix=$BUILDDIR/$DESTDIR/iOS_$ARCH
