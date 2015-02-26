@@ -1,5 +1,9 @@
 #!/bin/sh
 
+LIBODB_VERSION=2.3.0
+LIBODB_NAME="libodb-"$LIBODB_VERSION
+cd $LIBODB_NAME
+
 set -xe
 BUILDDIR=`pwd`
 DESTDIR="BuildOutput"
@@ -7,14 +11,18 @@ DESTDIR="BuildOutput"
 #iOS i386(Simulator) Build Start
 ARCH="i386"
 IOSMV="-mios-simulator-version-min=5.0"
+SDKNAME="iphonesimulator"
+OPTIMIZATION="-Os"
+STDLIB="-stdlib=libstdc++"
 
-PATH=`xcodebuild -version -sdk iphonesimulator PlatformPath`"/Developer/usr/bin:$PATH" \
-SDK=`xcodebuild -version -sdk iphonesimulator Path` \
-CC="xcrun --sdk iphonesimulator clang -arch $ARCH $IOSMV --sysroot=$SDK -isystem $SDK/usr/include" \
-CXX="xcrun --sdk iphonesimulator clang++ -arch $ARCH $IOSMV --sysroot=$SDK -isystem $SDK/usr/include" \
+PATH=`xcodebuild -version -sdk $SDKNAME PlatformPath`"/Developer/usr/bin:$PATH" \
+SDK=`xcodebuild -version -sdk $SDKNAME Path` \
+CC="xcrun --sdk $SDKNAME clang -arch $ARCH $IOSMV --sysroot=$SDK -isystem $SDK/usr/include" \
+CXX="xcrun --sdk $SDKNAME clang++ -arch $ARCH $IOSMV --sysroot=$SDK -isystem $SDK/usr/include" \
 LDFLAGS="-Wl,-syslibroot,$SDK" \
 ./configure \
-CXXFLAGS="-Os" \
+CFLAGS="$OPTIMIZATION" \
+CXXFLAGS="$OPTIMIZATION $STDLIB" \
 --disable-threads \
 --host=arm-apple-darwin \
 --disable-shared \
@@ -24,3 +32,5 @@ make
 make install
 make clean
 #iOS i386(Simulator) Build End
+
+cd ..
